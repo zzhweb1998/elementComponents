@@ -16,7 +16,7 @@
         :key="index"
       >
         <!-- input输入框 -->
-        <el-input v-model="ruleForm[itm.value]" v-if="itm.type=='input'"></el-input>
+        <el-input v-model="ruleForm[itm.value]" v-if="itm.type=='input'" :placeholder="itm.placeholder"></el-input>
         <!-- select选择框 -->
         <el-select
           v-model="ruleForm[itm.value]"
@@ -53,7 +53,7 @@
           <el-radio :label="itm2.label" v-for="(itm2,index2) in itm.children" :key="index2"></el-radio>
         </el-radio-group>
         <!-- textarea多文本框 -->
-        <el-input type="textarea" v-model="ruleForm[itm.value]" v-if="itm.type=='textarea'"></el-input>
+        <el-input type="textarea" v-model="ruleForm[itm.value]" v-if="itm.type=='textarea'" :placeholder="itm.placeholder"></el-input>
       </el-form-item>
 
       <el-form-item>

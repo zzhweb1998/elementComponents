@@ -78,7 +78,7 @@ export default {
 .el-container {
   height: calc(100% - 60px);
   .el-aside {
-    width: 180px !important;
+    width: 220px !important;
     margin: 20px 0;
     border-right: 1px solid #ccc;
   }
