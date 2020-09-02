@@ -1,12 +1,12 @@
 <template>
   <el-container>
-    <el-aside width="220px">
+    <el-aside>
       <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
-        router=true
+        router
         active-text-color="#409EFF"
       >
         <el-submenu index="1">
@@ -55,14 +55,35 @@
   </el-container>
 </template>
 
+<script>
+export default {
+  data(){
+    return{
+      
+    }
+  },
+  methods:{
+    handleOpen(){
+
+    },
+    handleClose(){
+
+    },
+  }
+}
+</script>
+
 <style lang="less" scoped>
+
 .el-container {
   height: calc(100% - 60px);
   .el-aside {
+    width: 180px !important;
     margin: 20px 0;
     border-right: 1px solid #ccc;
   }
   .el-main {
+    height: 100%;
   }
 }
 </style>

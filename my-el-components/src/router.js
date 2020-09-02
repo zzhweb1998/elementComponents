@@ -10,7 +10,8 @@ import enterForm from './components/form/enterForm'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '/',
       name: 'HelloComponents',
       component: HelloComponents
