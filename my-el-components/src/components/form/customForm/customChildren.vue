@@ -15,7 +15,7 @@
         v-for="(itm,index) in formData.formArr"
         :key="index"
       >
-      <!-- input输入框 -->
+        <!-- input输入框 -->
         <el-input v-model="ruleForm[itm.value]" v-if="itm.type=='input'"></el-input>
         <!-- select选择框 -->
         <el-select
@@ -23,7 +23,12 @@
           :placeholder="itm.placeholder"
           v-if="itm.type=='select'"
         >
-          <el-option :label="itm2.label" :value="itm2.value" v-for="(itm2,index2) in itm.children" :key="index2"></el-option>
+          <el-option
+            :label="itm2.label"
+            :value="itm2.value"
+            v-for="(itm2,index2) in itm.children"
+            :key="index2"
+          ></el-option>
         </el-select>
         <!-- datetime日期时间 -->
         <el-date-picker
@@ -36,7 +41,12 @@
         <el-switch v-model="ruleForm[itm.value]" v-if="itm.type=='switch'"></el-switch>
         <!-- checkbox多选框 -->
         <el-checkbox-group v-model="ruleForm[itm.value]" v-if="itm.type=='checkbox'">
-          <el-checkbox :label="itm2.label" :name="itm2.value" v-for="(itm2,index2) in itm.children" :key="index2"></el-checkbox>
+          <el-checkbox
+            :label="itm2.label"
+            :name="itm2.value"
+            v-for="(itm2,index2) in itm.children"
+            :key="index2"
+          ></el-checkbox>
         </el-checkbox-group>
         <!-- radio单选框 -->
         <el-radio-group v-model="ruleForm[itm.value]" v-if="itm.type=='radio'">
@@ -56,150 +66,35 @@
 
 
 <script>
+let self;
 export default {
+  props: {
+    customData: {
+      type: Object,
+    },
+    ruleCustom: {
+      type: Object,
+    },
+    rules: {
+      type: Object,
+    },
+  },
   data() {
     return {
-      ruleForm: {
-        name: "",
-        region: "",
-        date: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-      },
-      rules: {
-        name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
-        ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" },
-        ],
-        date: [
-          {
-            type: "datetime",
-            required: true,
-            message: "请选择日期",
-            trigger: "change",
-          },
-        ],
-        type: [
-          {
-            type: "array",
-            required: true,
-            message: "请至少选择一个活动性质",
-            trigger: "change",
-          },
-        ],
-        resource: [
-          { required: true, message: "请选择活动资源", trigger: "change" },
-        ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
-      },
-      formData: {
-        formTitle: "表单标题",
-        formArr: [
-          {
-            type: "input",
-            value: "name",
-            label: "活动名称",
-            prop: "name",
-            placeholder: "",
-            children: [],
-          },
-          {
-            type: "select",
-            value: "region",
-            label: "活动区域",
-            prop: "region",
-            placeholder: "请选择活动区域",
-            children: [
-              {
-                label: "区域一",
-                value: "shanghai",
-              },
-              {
-                label: "区域二",
-                value: "beijing",
-              },
-            ],
-          },
-          {
-            type: "datetime",
-            value: "date",
-            label: "活动时间",
-            prop: "date",
-            placeholder: "选择日期时间",
-            children: [],
-          },
-          {
-            type: "switch",
-            value: "delivery",
-            label: "即时配送",
-            prop: "delivery",
-            placeholder: "",
-            children: [],
-          },
-          {
-            type: "checkbox",
-            value: "type",
-            label: "活动性质",
-            prop: "type",
-            placeholder: "",
-            children: [
-              {
-                label: "美食/餐厅线上活动",
-                value: "type",
-              },
-              {
-                label: "地推活动",
-                value: "type",
-              },
-              {
-                label: "线下主题活动",
-                value: "type",
-              },
-              {
-                label: "单纯品牌曝光",
-                value: "type",
-              },
-            ],
-          },
-          {
-            type: "radio",
-            value: "resource",
-            label: "特殊资源",
-            prop: "resource",
-            placeholder: "",
-            children: [
-              {
-                label: "线上品牌商赞助",
-                value: "线上品牌商赞助",
-              },
-              {
-                label: "线下场地免费",
-                value: "线下场地免费",
-              },
-            ],
-          },
-          {
-            type: "textarea",
-            value: "desc",
-            label: "活动形式",
-            prop: "desc",
-            placeholder: "",
-            children: [],
-          },
-        ],
-      },
+      ruleForm: {},
+      formData: {},
     };
+  },
+  created(){
+    self = this;
+    self.ruleForm = JSON.parse(JSON.stringify(self.ruleCustom))
+    self.formData = JSON.parse(JSON.stringify(self.customData))
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          console.log(self.ruleForm);
         } else {
           console.log("error submit!!");
           return false;
