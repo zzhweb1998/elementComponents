@@ -1,8 +1,8 @@
 <template>
-  <!-- 自定义组件载体 -->
+  <!-- 自定义表单组件载体 -->
   <div id="customForm">
-    <!-- 自定义组件 -->
-    <custom-children :customData="formData" :ruleCustom="ruleForm" :rules="rules"></custom-children>
+    <!-- 自定义表单组件 -->
+    <custom-children :customData="formData"></custom-children>
   </div>
 </template>
 
@@ -16,24 +16,35 @@ export default {
   },
   data() {
     return {
-      data: "",
       formData: {
-        formTitle: "表单标题",
-        formArr: [
+        title: "自定义表单",  //表单标题
+        width:400,  //表单宽度
+        labelWid: "120px",  //label宽度  
+        formList: [
+          // 输入框（type为password（密码输入框）、number（数值输入框））
           {
-            type: "input",
-            value: "name",
-            label: "活动名称",
-            prop: "name",
-            placeholder: "",
-            children: [],
+            type: "number", //表单类型
+            label: "活动名称", //label名称
+            value: "", //绑定值 （多选value值为数组类型）
+            placeholder: "", //默认提示文本
+            children: [], //子选项（如：单选、多选和下拉框的选项）
+            disabled: false, //是否禁止编辑
+            rules: [
+              { required: true, message: "请输入活动名称", trigger: "blur" },
+              {
+                min: 3,
+                max: 5,
+                message: "长度在 3 到 5 个字符",
+                trigger: "blur",
+              },
+            ], //表单校验方式（required: true：是否必填）
           },
+          //下拉选择框
           {
-            type: "select",
-            value: "region",
-            label: "活动区域",
-            prop: "region",
-            placeholder: "请选择活动区域",
+            type: "select", //表单类型
+            label: "活动区域", //label名称
+            value: "", //绑定值 （多选value值为数组类型）
+            placeholder: "请选择活动区域", //默认提示文本
             children: [
               {
                 label: "区域一",
@@ -43,30 +54,34 @@ export default {
                 label: "区域二",
                 value: "beijing",
               },
-            ],
+            ], //子选项（如：单选、多选和下拉框的选项）
+            disabled: false, //是否禁止编辑
+            rules: [
+              { required: true, message: "请选择活动区域", trigger: "change" },
+            ], //表单校验方式（required: true：是否必填）
           },
+          //日期时间
           {
-            type: "datetime",
-            value: "date",
-            label: "活动时间",
-            prop: "date",
-            placeholder: "选择日期时间",
-            children: [],
+            type: "datetime", //表单类型
+            label: "活动时间", //label名称
+            value: "", //绑定值 （多选value值为数组类型）
+            placeholder: "选择日期时间", //默认提示文本
+            children: [], //子选项（如：单选、多选和下拉框的选项）
+            disabled: false, //是否禁止编辑
+            rules: [
+              {
+                required: true,
+                message: "请选择日期",
+                trigger: "change",
+              },
+            ], //表单校验方式（required: true：是否必填）
           },
+          //多选框
           {
-            type: "switch",
-            value: "delivery",
-            label: "即时配送",
-            prop: "delivery",
-            placeholder: "",
-            children: [],
-          },
-          {
-            type: "checkbox",
-            value: "type",
-            label: "活动性质",
-            prop: "type",
-            placeholder: "",
+            type: "checkbox", //表单类型
+            label: "活动性质", //label名称
+            value: [], //绑定值 （多选value值为数组类型）
+            placeholder: "", //默认提示文本
             children: [
               {
                 label: "美食/餐厅线上活动",
@@ -84,14 +99,23 @@ export default {
                 label: "单纯品牌曝光",
                 value: "type",
               },
-            ],
+            ], //子选项（如：单选、多选和下拉框的选项）
+            disabled: false, //是否禁止编辑
+            rules: [
+              {
+                type: "array",
+                required: true,
+                message: "请至少选择一个活动性质",
+                trigger: "change",
+              },
+            ], //表单校验方式（required: true：是否必填）
           },
+          //单选框
           {
-            type: "radio",
-            value: "resource",
-            label: "特殊资源",
-            prop: "resource",
-            placeholder: "",
+            type: "radio", //表单类型
+            label: "特殊资源", //label名称
+            value: "", //绑定值 （多选value值为数组类型）
+            placeholder: "", //默认提示文本
             children: [
               {
                 label: "线上品牌商赞助",
@@ -101,58 +125,29 @@ export default {
                 label: "线下场地免费",
                 value: "线下场地免费",
               },
-            ],
+            ], //子选项（如：单选、多选和下拉框的选项）
+            disabled: false, //是否禁止编辑
+            rules: [
+              { required: true, message: "请选择活动资源", trigger: "change" },
+            ], //表单校验方式（required: true：是否必填）
           },
+          //多文本框
           {
-            type: "textarea",
-            value: "desc",
-            label: "活动形式",
-            prop: "desc",
-            placeholder: "",
-            children: [],
+            type: "textarea", //表单类型
+            label: "活动形式", //label名称
+            value: "", //绑定值 （多选value值为数组类型）
+            placeholder: "", //默认提示文本
+            children: [], //子选项（如：单选、多选和下拉框的选项）
+            disabled: false, //是否禁止编辑
+            rules: [{ required: true, message: "请填写活动形式", trigger: "blur" }], //表单校验方式（required: true：是否必填）
           },
         ],
-      },
-      ruleForm: {
-        name: "",
-        region: "",
-        date: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-      },
-      rules: {
-        name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
-        ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" },
-        ],
-        date: [
-          {
-            required: true,
-            message: "请选择日期",
-            trigger: "change",
-          },
-        ],
-        type: [
-          {
-            type: "array",
-            required: true,
-            message: "请至少选择一个活动性质",
-            trigger: "change",
-          },
-        ],
-        resource: [
-          { required: true, message: "请选择活动资源", trigger: "change" },
-        ],
-        desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
-      },
+      }, // 表单配置清单
     };
   },
-  created() {},
+  created() {
+  },
+  methods: {},
 };
 </script>
 

@@ -1,60 +1,138 @@
 <template>
-  <!-- 自定义组件 -->
-  <div id="customChildren">
-    <p>{{formData.formTitle}}</p>
+  <!-- 自定义表单组件 -->
+  <div id="customChildren" :style="'width:'+formData.width+'px'">
+    <p>{{formData.title}}</p>
     <el-form
-      :model="ruleForm"
-      :rules="rules"
+      :model="formData"
       ref="ruleForm"
-      label-width="100px"
+      :label-width="formData.labelWid"
       class="demo-ruleForm"
     >
-      <el-form-item
-        :label="itm.label"
-        :prop="itm.prop"
-        v-for="(itm,index) in formData.formArr"
-        :key="index"
-      >
+      <div class="formBox" v-for="(itm,index) in formData.formList" :key="index">
         <!-- input输入框 -->
-        <el-input v-model="ruleForm[itm.value]" v-if="itm.type=='input'" :placeholder="itm.placeholder"></el-input>
-        <!-- select选择框 -->
-        <el-select
-          v-model="ruleForm[itm.value]"
-          :placeholder="itm.placeholder"
-          v-if="itm.type=='select'"
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='input'"
+          :rules="itm.rules"
         >
-          <el-option
-            :label="itm2.label"
-            :value="itm2.value"
-            v-for="(itm2,index2) in itm.children"
-            :key="index2"
-          ></el-option>
-        </el-select>
+          <el-input v-model="itm.value" :placeholder="itm.placeholder" :disabled="itm.disabled"></el-input>
+        </el-form-item>
+
+        <!-- password密码输入框 -->
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='password'"
+          :rules="itm.rules"
+        >
+          <el-input
+            v-model="itm.value"
+            :placeholder="itm.placeholder"
+            :disabled="itm.disabled"
+            show-password
+          ></el-input>
+        </el-form-item>
+
+        <!-- number数值输入框 -->
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='number'"
+          :rules="itm.rules"
+        >
+          <el-input
+            type="number"
+            v-model="itm.value"
+            :placeholder="itm.placeholder"
+            :disabled="itm.disabled"
+          ></el-input>
+        </el-form-item>
+
+        <!-- select选择框 -->
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='select'"
+          :rules="itm.rules"
+        >
+          <el-select v-model="itm.value" :placeholder="itm.placeholder" :disabled="itm.disabled">
+            <el-option
+              :label="itm2.label"
+              :value="itm2.value"
+              v-for="(itm2,index2) in itm.children"
+              :key="index2"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+
         <!-- datetime日期时间 -->
-        <el-date-picker
-          v-model="ruleForm[itm.value]"
-          type="datetime"
-          :placeholder="itm.placeholder"
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
           v-if="itm.type=='datetime'"
-        ></el-date-picker>
-        <!-- switch滑块 -->
-        <el-switch v-model="ruleForm[itm.value]" v-if="itm.type=='switch'"></el-switch>
+          :rules="itm.rules"
+        >
+          <el-date-picker
+            v-model="itm.value"
+            type="datetime"
+            :placeholder="itm.placeholder"
+            :disabled="itm.disabled"
+          ></el-date-picker>
+        </el-form-item>
+
         <!-- checkbox多选框 -->
-        <el-checkbox-group v-model="ruleForm[itm.value]" v-if="itm.type=='checkbox'">
-          <el-checkbox
-            :label="itm2.label"
-            :name="itm2.value"
-            v-for="(itm2,index2) in itm.children"
-            :key="index2"
-          ></el-checkbox>
-        </el-checkbox-group>
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='checkbox'"
+          :rules="itm.rules"
+        >
+          <el-checkbox-group v-model="itm.value" :disabled="itm.disabled">
+            <el-checkbox
+              v-for="(itm2,index2) in itm.children"
+              :key="index2"
+              :label="itm2.label"
+              :name="itm2.value"
+            ></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+
         <!-- radio单选框 -->
-        <el-radio-group v-model="ruleForm[itm.value]" v-if="itm.type=='radio'">
-          <el-radio :label="itm2.label" v-for="(itm2,index2) in itm.children" :key="index2"></el-radio>
-        </el-radio-group>
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='radio'"
+          :rules="itm.rules"
+        >
+          <el-radio-group v-model="itm.value" :disabled="itm.disabled">
+            <el-radio :label="itm2.label" v-for="(itm2,index2) in itm.children" :key="index2"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+
         <!-- textarea多文本框 -->
-        <el-input type="textarea" v-model="ruleForm[itm.value]" v-if="itm.type=='textarea'" :placeholder="itm.placeholder"></el-input>
-      </el-form-item>
+        <el-form-item
+          :label="itm.label"
+          :prop="'formList.'+index+'.value'"
+          :key="index"
+          v-if="itm.type=='textarea'"
+          :rules="itm.rules"
+        >
+          <el-input
+            type="textarea"
+            v-model="itm.value"
+            :placeholder="itm.placeholder"
+            :disabled="itm.disabled"
+          ></el-input>
+        </el-form-item>
+      </div>
 
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -72,12 +150,6 @@ export default {
     customData: {
       type: Object,
     },
-    ruleCustom: {
-      type: Object,
-    },
-    rules: {
-      type: Object,
-    },
   },
   data() {
     return {
@@ -85,16 +157,15 @@ export default {
       formData: {},
     };
   },
-  created(){
+  created() {
     self = this;
-    self.ruleForm = JSON.parse(JSON.stringify(self.ruleCustom))
-    self.formData = JSON.parse(JSON.stringify(self.customData))
+    self.formData = JSON.parse(JSON.stringify(self.customData));
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(self.ruleForm);
+          console.log(self.formData);
         } else {
           console.log("error submit!!");
           return false;
@@ -111,7 +182,6 @@ export default {
 
 <style lang="less" scoped>
 #customChildren {
-  width: 500px;
   .el-form {
     .el-form-item {
       .el-select {
@@ -129,6 +199,14 @@ export default {
         .el-radio {
           width: auto;
         }
+      }
+      //去掉type=number的上下箭头
+      /deep/ input::-webkit-outer-spin-button,
+      /deep/ input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      /deep/ input[type="number"] {
+        -moz-appearance: textfield;
       }
     }
   }

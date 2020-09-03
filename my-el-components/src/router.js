@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import HelloComponents from './components/HelloComponents'
 import customForm from './components/form/customForm'
 import enterForm from './components/form/enterForm'
+import recursionForm from './components/form/recursionForm'
 
 
 Vue.use(Router)
@@ -25,6 +26,11 @@ export default new Router({
       path: '/enterForm',
       name: 'enterForm',
       component: enterForm
+    },
+    {
+      path: '/recursionForm',
+      name: 'recursionForm',
+      component: recursionForm
     },
   ]
 })
