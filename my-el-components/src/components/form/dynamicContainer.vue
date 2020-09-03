@@ -1,23 +1,23 @@
 <template>
-  <!-- 自定义表单组件载体 -->
-  <div id="customForm">
-    <!-- 自定义表单组件 -->
-    <custom-children :customData="formData"></custom-children>
+  <!-- 动态表单组件载体 -->
+  <div id="dynamicContainer">
+    <!-- 动态表单组件 -->
+    <dynamic-form :dynamicData="formData"></dynamic-form>
   </div>
 </template>
 
 <script>
-import customChildren from "./customForm/customChildren";
+import dynamicForm from "./dynamicContainer/dynamicForm";
 
 export default {
-  name: "customForm",
+  name: "dynamicContainer",
   components: {
-    customChildren,
+    dynamicForm,
   },
   data() {
     return {
       formData: {
-        title: "自定义表单",  //表单标题
+        title: "动态表单",  //表单标题
         width:400,  //表单宽度
         labelWid: "120px",  //label宽度  
         formList: [

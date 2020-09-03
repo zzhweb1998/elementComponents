@@ -15,8 +15,8 @@
             <span>表单组件</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/customForm">自定义表单</el-menu-item>
-            <el-menu-item index="/recursionForm">递归表单</el-menu-item>
+            <el-menu-item index="/dynamicContainer">动态表单</el-menu-item>
+            <el-menu-item index="/recursionContainer">递归表单</el-menu-item>
             <el-menu-item index="/enterForm">回车跳转表单</el-menu-item>
           </el-menu-item-group>
         </el-submenu>

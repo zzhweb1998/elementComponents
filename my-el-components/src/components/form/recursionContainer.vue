@@ -1,18 +1,18 @@
 <template>
   <!-- 递归表单组件载体 -->
-  <div id="recursionForm">
+  <div id="recursionContainer">
     <!-- 递归表单组件 -->
-    <recursion-children></recursion-children>
+    <recursion-form></recursion-form>
   </div>
 </template>
 
 <script>
-import recursionChildren from "./recursionForm/recursionChildren";
+import recursionForm from "./recursionContainer/recursionForm";
 
 export default {
-  name: "recursionForm",
+  name: "recursionContainer",
   components: {
-    recursionChildren,
+    recursionForm,
   },
   data() {
     return {

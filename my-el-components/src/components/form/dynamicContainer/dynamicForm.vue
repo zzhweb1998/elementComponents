@@ -1,6 +1,6 @@
 <template>
-  <!-- 自定义表单组件 -->
-  <div id="customChildren" :style="'width:'+formData.width+'px'">
+  <!-- 动态表单组件 -->
+  <div id="dynamicForm" :style="'width:'+formData.width+'px'">
     <p>{{formData.title}}</p>
     <el-form
       :model="formData"
@@ -147,19 +147,18 @@
 let self;
 export default {
   props: {
-    customData: {
+    dynamicData: {
       type: Object,
     },
   },
   data() {
     return {
-      ruleForm: {},
       formData: {},
     };
   },
   created() {
     self = this;
-    self.formData = JSON.parse(JSON.stringify(self.customData));
+    self.formData = JSON.parse(JSON.stringify(self.dynamicData));
   },
   methods: {
     submitForm(formName) {
@@ -181,7 +180,7 @@ export default {
 
 
 <style lang="less" scoped>
-#customChildren {
+#dynamicForm {
   .el-form {
     .el-form-item {
       .el-select {
