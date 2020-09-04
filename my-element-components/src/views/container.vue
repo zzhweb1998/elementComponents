@@ -12,22 +12,23 @@
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span>表单组件</span>
+            <span>FORM组件</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/dynamicContainer">动态表单</el-menu-item>
-            <el-menu-item index="/recursionContainer">递归表单</el-menu-item>
-            <el-menu-item index="/enterForm">回车跳转表单</el-menu-item>
+            <el-menu-item index="/form/dynamicContainer">动态</el-menu-item>
+            <el-menu-item index="/form/recursionContainer">递归</el-menu-item>
+            <el-menu-item index="/form/enterForm">回车跳转</el-menu-item>
+            <el-menu-item index="/form/verificationContainer">验证码</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span>导航二</span>
+            <span>Table组件</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
+            <el-menu-item index="2-1">常规</el-menu-item>
+            <el-menu-item index="/table/pagingContainer">分页</el-menu-item>
             <el-submenu index="2-4">
               <template slot="title">选项4</template>
               <el-menu-item index="2-4-1">选项1</el-menu-item>

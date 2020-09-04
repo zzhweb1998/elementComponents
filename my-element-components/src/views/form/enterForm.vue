@@ -1,5 +1,6 @@
 <template>
   <div id="enterForm">
+    <p style="margin-bottom:30px">回车跳转表单</p>
     <el-form ref="form" :model="form" label-width="80px" v-enter-to-next="'form'">
       <el-form-item label="活动名称">
         <el-input v-model="form.name"></el-input>

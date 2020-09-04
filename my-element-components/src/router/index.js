@@ -11,17 +11,26 @@ Vue.use(VueRouter)
     component: () => import( '../views/HelloComponents.vue')
   },
   {
-    path: '/dynamicContainer',
+    path: '/form/dynamicContainer',
     name: 'dynamicContainer',
     component: () => import( '../views/form/dynamicContainer.vue')
   },{
-    path: '/enterForm',
+    path: '/form/enterForm',
     name: 'enterForm',
     component: () => import( '../views/form/enterForm.vue')
   },{
-    path: '/recursionContainer',
+    path: '/form/recursionContainer',
     name: 'recursionContainer',
     component: () => import( '../views/form/recursionContainer.vue')
+  },{
+    path: '/form/verificationContainer',
+    name: 'verificationContainer',
+    component: () => import( '../views/form/verificationContainer.vue')
+  },
+  {
+    path: '/table/pagingContainer',
+    name: 'pagingContainer',
+    component: () => import( '../views/table/pagingContainer.vue')
   },
 ]
 
