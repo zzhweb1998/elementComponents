@@ -393,6 +393,7 @@ export default {
 
 <style lang="less" scoped>
 #recursionContainer {
-  width: 500px;
+  width: 600px;
+  margin: 10px auto;
 }
 </style>

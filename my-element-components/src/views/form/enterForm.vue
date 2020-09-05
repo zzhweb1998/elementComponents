@@ -66,7 +66,6 @@ export default {
   },
   created() {
     console.log(this);
-    console.log(1111111111111111111);
   },
   methods: {
     onSubmit() {
@@ -78,6 +77,7 @@ export default {
 
 <style lang="less" scoped>
 #enterForm {
-  width: 500px;
+  width: 600px;
+  margin: 10px auto;
 }
 </style>

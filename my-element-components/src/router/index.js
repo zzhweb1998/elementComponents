@@ -28,9 +28,14 @@ Vue.use(VueRouter)
     component: () => import( '../views/form/verificationContainer.vue')
   },
   {
-    path: '/table/pagingContainer',
-    name: 'pagingContainer',
-    component: () => import( '../views/table/pagingContainer.vue')
+    path: '/table/customContainer',
+    name: 'customContainer',
+    component: () => import( '../views/table/customContainer.vue')
+  },
+  {
+    path: '/table/commonlyContainer',
+    name: 'commonlyContainer',
+    component: () => import( '../views/table/commonlyContainer.vue')
   },
 ]
 

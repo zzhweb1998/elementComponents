@@ -152,4 +152,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#dynamicContainer{
+  width: 600px;
+  margin: 10px auto;
+}
 </style>

@@ -27,12 +27,8 @@
             <span>Table组件</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">常规</el-menu-item>
-            <el-menu-item index="/table/pagingContainer">分页</el-menu-item>
-            <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项1</el-menu-item>
-            </el-submenu>
+            <el-menu-item index="/table/customContainer">自定义</el-menu-item>
+            <el-menu-item index="/table/CommonlyContainer">常用Table</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
