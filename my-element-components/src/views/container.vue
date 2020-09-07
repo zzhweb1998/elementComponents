@@ -82,6 +82,7 @@ export default {
   }
   .el-main {
     height: 100%;
+    
   }
 }
 </style>
