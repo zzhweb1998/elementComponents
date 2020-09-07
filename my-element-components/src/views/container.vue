@@ -34,10 +34,10 @@
         <el-submenu index="3">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span>导航三</span>
+            <span>Layout布局</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="3-1">选项1</el-menu-item>
+            <el-menu-item index="/layout/waterfallContainer">瀑布流</el-menu-item>
             <el-menu-item index="3-2">选项2</el-menu-item>
             <el-submenu index="3-4">
               <template slot="title">选项4</template>

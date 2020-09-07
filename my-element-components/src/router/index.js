@@ -37,6 +37,11 @@ Vue.use(VueRouter)
     name: 'commonlyContainer',
     component: () => import( '../views/table/commonlyContainer.vue')
   },
+  {
+    path: '/layout/waterfallContainer',
+    name: 'waterfallContainer',
+    component: () => import( '../views/layout/waterfallContainer.vue')
+  },
 ]
 
 const router = new VueRouter({
