@@ -21,5 +21,6 @@ router.post('/article', ArticleController.create);
 router.get('/article/:id', ArticleController.detail);
 //获取所有文章接口
 router.get('/listAll', ArticleController.listAll);
-
+//修改文章信息接口
+router.get('/update', ArticleController.update);
 module.exports = router

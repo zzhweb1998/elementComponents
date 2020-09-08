@@ -108,7 +108,7 @@ class articleController {
     }
 
     //修改文章内容
-    static async Update(ctx) {
+    static async update(ctx) {
         let req = ctx.request.body.data;
         try {
             // 查询文章详情模型
