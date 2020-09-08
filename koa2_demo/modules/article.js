@@ -4,8 +4,12 @@ const Sequelize = db.sequelize;
 // 引入上一步的文章数据表模型文件
 const Article = Sequelize.import('../schema/article');
 // 自动创建表
-Article.sync({force: false});
+Article.sync({
+    force: false
+});
 
+
+//文章 
 class ArticleModel {
     /**
      * 创建文章模型
@@ -31,6 +35,26 @@ class ArticleModel {
             where: {
                 id,
             },
+        })
+    }
+
+    //获取所有文章
+    static async getArticleListAll() {
+        return await Article.findAll()
+    }
+
+    //修改文章信息
+    static async getArticleUpdate(data) {
+        /**参数data格式
+         * data:{
+         *  id:null, //根据id修改
+         *  data: {} //修改的数据
+         * }
+         */
+        return await Article.update(data.data, {
+            where: {
+                id: data.id
+            }
         })
     }
 }

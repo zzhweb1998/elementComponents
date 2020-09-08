@@ -1,5 +1,6 @@
 const ArticleModel = require('../modules/article')
 
+//文章
 class articleController {
     /**
      * 创建文章
@@ -10,9 +11,12 @@ class articleController {
         // 接收客服端
         let req = ctx.request.body.data;
         if (req.title // 文章标题
-            && req.author // 文章作者
-            && req.content // 文章内容
-            && req.category // 文章分类
+            &&
+            req.author // 文章作者
+            &&
+            req.content // 文章内容
+            &&
+            req.category // 文章分类
         ) {
             try {
                 // 创建文章模型
@@ -22,7 +26,7 @@ class articleController {
 
                 ctx.response.status = 200;
                 ctx.body = {
-	    code: 200,
+                    code: 200,
                     msg: '新建成功',
                     data
                 }
@@ -30,7 +34,7 @@ class articleController {
             } catch (err) {
                 ctx.response.status = 412;
                 ctx.body = {
-	    code: 412,
+                    code: 412,
                     msg: '新建失败',
                     data: err
                 }
@@ -38,7 +42,7 @@ class articleController {
         } else {
             ctx.response.status = 416;
             ctx.body = {
-	code:416,
+                code: 416,
                 msg: '参数不齐全',
             }
         }
@@ -77,6 +81,49 @@ class articleController {
             ctx.body = {
                 code: 416,
                 msg: '文章ID必须传'
+            }
+        }
+    }
+
+    //获取所有文章
+    static async listAll(ctx) {
+        try {
+            // 查询文章详情模型
+            let data = await ArticleModel.getArticleListAll();
+            ctx.response.status = 200;
+            ctx.body = {
+                code: 200,
+                msg: '获取成功',
+                data
+            }
+
+        } catch (err) {
+            ctx.response.status = 412;
+            ctx.body = {
+                code: 412,
+                msg: '获取失败',
+                data
+            }
+        }
+    }
+
+    //修改文章内容
+    static async Update(ctx) {
+        let req = ctx.request.body.data;
+        try {
+            // 查询文章详情模型
+            let data = await ArticleModel.getArticleUpdate(req);
+            ctx.response.status = 200;
+            ctx.body = {
+                code: 200,
+                msg: '修改成功',
+            }
+
+        } catch (err) {
+            ctx.response.status = 412;
+            ctx.body = {
+                code: 412,
+                msg: '修改失败',
             }
         }
     }

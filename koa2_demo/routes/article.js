@@ -19,5 +19,7 @@ router.get('/', async (ctx, next) => {
 router.post('/article', ArticleController.create);
 // 获取文章详情接口（路由）
 router.get('/article/:id', ArticleController.detail);
+//获取所有文章接口
+router.get('/listAll', ArticleController.listAll);
 
 module.exports = router

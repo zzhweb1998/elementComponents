@@ -1,4 +1,6 @@
 const moment = require('moment');
+
+//文章（数据模型）
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('article', {
         // 文章ID
