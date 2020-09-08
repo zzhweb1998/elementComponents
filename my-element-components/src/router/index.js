@@ -42,6 +42,11 @@ Vue.use(VueRouter)
     name: 'waterfallContainer',
     component: () => import( '../views/layout/waterfallContainer.vue')
   },
+  {
+    path: '/test/test1',
+    name: 'test1',
+    component: () => import( '../views/test/test1.vue')
+  },
 ]
 
 const router = new VueRouter({

@@ -38,11 +38,15 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="/layout/waterfallContainer">瀑布流</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项1</el-menu-item>
-            </el-submenu>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="4">
+          <template slot="title">
+            <i class="el-icon-menu"></i>
+            <span>api测试</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/test/test1">测试1</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -55,24 +59,17 @@
 
 <script>
 export default {
-  data(){
-    return{
-      
-    }
+  data() {
+    return {};
   },
-  methods:{
-    handleOpen(){
-
-    },
-    handleClose(){
-
-    },
-  }
-}
+  methods: {
+    handleOpen() {},
+    handleClose() {},
+  },
+};
 </script>
 
 <style lang="less" scoped>
-
 .el-container {
   height: calc(100% - 60px);
   .el-aside {
@@ -82,7 +79,6 @@ export default {
   }
   .el-main {
     height: 100%;
-    
   }
 }
 </style>
