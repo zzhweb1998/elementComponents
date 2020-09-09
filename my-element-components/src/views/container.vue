@@ -2,7 +2,7 @@
   <el-container>
     <el-aside>
       <el-menu
-        default-active="2"
+        :default-active="$route.path"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
@@ -43,10 +43,10 @@
         <el-submenu index="4">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span>api测试</span>
+            <span>Api接口</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/test/test1">测试1</el-menu-item>
+            <el-menu-item index="/test/test1">测试</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

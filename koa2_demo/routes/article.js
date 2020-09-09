@@ -15,12 +15,23 @@ router.get('/', async (ctx, next) => {
 /**
  * 文章接口
  */
-// 创建文章接口（路由）
+// 创建接口（路由）
 router.post('/article', ArticleController.create);
-// 获取文章详情接口（路由）
+// 获取详情接口（路由）
 router.get('/article/:id', ArticleController.detail);
-//获取所有文章接口
+//获取所有数据接口
 router.get('/listAll', ArticleController.listAll);
-//修改文章信息接口
+//修改接口
 router.get('/update', ArticleController.update);
+//删除接口
+router.get('/delete/:id', ArticleController.delete);
+//分页查询接口
+router.post('/pagQuery', ArticleController.pagQuery);
+//模糊查询接口
+router.post('/fuzzyQuery', ArticleController.fuzzyQuery);
+//排序接口
+router.post('/orderData', ArticleController.orderData);
+//指定查询接口
+router.get('/assignQuery', ArticleController.assignQuery);
+
 module.exports = router

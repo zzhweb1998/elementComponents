@@ -12,13 +12,13 @@ module.exports = function (sequelize, DataTypes) {
         },
         // 文章标题
         title: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false,
             field: 'title',
         },
         // 文章作者
         author: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(15),
             allowNull: false,
             field: 'author'
         },
@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         // 文章分类
         category: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(10),
             allowNull: false,
             field: 'category'
         },
