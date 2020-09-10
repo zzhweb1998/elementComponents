@@ -11,7 +11,6 @@ const article = require('./routes/article')
 const users = require('./routes/users')
 
 
-
 // error handler
 onerror(app)
 

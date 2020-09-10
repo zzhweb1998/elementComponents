@@ -47,6 +47,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="/test/test1">测试</el-menu-item>
+            <el-menu-item index="/test/webSocket">聊天</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
