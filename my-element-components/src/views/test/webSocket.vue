@@ -133,6 +133,16 @@ export default {
       this.listData = [];
       this.chatData.receive_id = index;
       this.chatData.receive_name = name;
+      this.axios
+        .post("/api/v1/socket/searchOr",{
+          data:{
+            sender_id:this.chatData.sender_id,
+            receive_id:this.chatData.receive_id,
+          }
+        })
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
   destroyed() {

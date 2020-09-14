@@ -4,10 +4,32 @@ class socketController {
     static async openSocket(wss){
         wss.on('connection', function connection(ws) {
             ws.on('message', function incoming(message) {
-                console.log('received: %s', message);
+                SocketModel.createSocket(JSON.parse(message));
                 ws.send(message);
             });
         });
+    }
+
+    //查询聊天记录
+    static async searchOr(ctx) {
+        let req = ctx.request.body.data;
+        try {
+            let data = await SocketModel.searchOr(req);
+            ctx.response.status = 200;
+            ctx.body = {
+                code: 200,
+                msg: '聊天记录加载成功',
+                data
+            }
+
+        } catch (err) {
+            ctx.response.status = 412;
+            ctx.body = {
+                code: 412,
+                msg: '聊天记录加载失败',
+                data
+            }
+        }
     }
 }
 module.exports = socketController

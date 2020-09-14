@@ -13,6 +13,7 @@ Socket.sync({
 });
 
 class SocketModel{
+    //开启socket
     static async createSocket(data) {
         return await Socket.create({
             sender_id: data.sender_id, // 发送者id
@@ -22,4 +23,24 @@ class SocketModel{
             content: data.content //发送
         })
     }
+
+    //or查询
+    static async searchOr(data) {
+        return await Socket.findAll({
+            where:{
+                [Op.or]:[
+                    {
+                        sender_id: data.sender_id,
+                        receive_id: data.receive_id
+                    },
+                    {
+                        sender_id: data.receive_id,
+                        receive_id: data.sender_id
+                    }
+                ]
+            }
+        })
+    }
 }
+
+module.exports = SocketModel
