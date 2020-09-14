@@ -1,11 +1,24 @@
-module.exports = wss => {
-    wss.on('connection', function connection(ws) {
-        ws.on('message', function incoming(message) {
-            console.log('received: %s', message);
-            ws.send(message);
+const SocketModel = require('../modules/socket')
+
+class socketController {
+    static async openSocket(wss){
+        wss.on('connection', function connection(ws) {
+            ws.on('message', function incoming(message) {
+                console.log('received: %s', message);
+                ws.send(message);
+            });
         });
-    });
+    }
 }
+module.exports = socketController
+// module.exports = wss => {
+//     wss.on('connection', function connection(ws) {
+//         ws.on('message', function incoming(message) {
+//             console.log('received: %s', message);
+//             ws.send(message);
+//         });
+//     });
+// }
 
 // 1、安装ws：npm install ws --save
 // 2、 设置ws和koa共享同一个接口：
