@@ -7,6 +7,6 @@ const router = new Router({
 })
 
 // 创建接口（路由）
-router.post('/socket/searchOr', ArticleController.searchOr);
+router.post('/socket/searchOr', SocketController.searchOr);
 
 module.exports = router

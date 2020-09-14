@@ -9,6 +9,7 @@ const cors = require('koa-cors');
 
 const article = require('./routes/article')
 const users = require('./routes/users')
+const socket = require('./routes/socket')
 
 
 // error handler
@@ -40,6 +41,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(article.routes(), article.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(socket.routes(), socket.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
