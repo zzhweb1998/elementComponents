@@ -22,6 +22,7 @@ class articleController {
                 // 创建文章模型
                 const ret = await ArticleModel.createArticle(req);
                 // 把刚刚新建的文章ID查询文章详情，且返回新创建的文章信息
+                console.log("id:"+ret.id);
                 const data = await ArticleModel.getArticleDetail(ret.id);
 
                 ctx.response.status = 200;

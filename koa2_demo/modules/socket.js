@@ -20,7 +20,22 @@ class SocketModel{
             sender_name: data.sender_name, // 发送者名称
             receive_id: data.receive_id, // 接受者id
             receive_name: data.receive_name, // 接受者名称
-            content: data.content //发送
+            content: data.content //聊天信息
+        }).then(res=>{
+            return Socket.findOne({
+                where: {
+                    id: parseInt(res.id),
+                },
+            })
+        })
+    }
+
+    //根据id查询
+    static async getSocketDetail(id) {
+        return await Socket.findOne({
+            where: {
+                id: parseInt(id),
+            },
         })
     }
 
