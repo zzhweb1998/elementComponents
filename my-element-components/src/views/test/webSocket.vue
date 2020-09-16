@@ -12,7 +12,7 @@
         <ul>
           <li v-for="(item,index) in listData" :key="index">
             <div class="cc-right" v-if="item.sender_id === chatData.sender_id">
-              <p class="cc-title">{{item.sender_name}} ---- {{item.time}}</p>
+              <p class="cc-title">{{item.sender_name}} ---- {{item.createdAt}}</p>
               <p class="cc-contnet">{{item.content}}</p>
             </div>
             <div class="cc-left" v-else>
@@ -55,14 +55,14 @@ export default {
           sender_name: "xxx",
           receive_id: 1,
           receive_name: "yyy",
-          time: "2020-09-10 15:35:59",
+          createdAt: "2020-09-10 15:35:59",
           content: "在吗",
         },
         {
           sender_id: 1,
           receive_id: 2,
           name: "yyy",
-          time: "2020-09-10 15:36:09",
+          createdAt: "2020-09-10 15:36:09",
           content: "在啊",
         },
       ],
@@ -91,7 +91,7 @@ export default {
     },
     websocketonmessage(e) {
       //数据接收
-      console.log(JSON.parse(e.data));
+      console.log(e);
       this.listData.push(JSON.parse(e.data));
     },
     websocketsend(Data) {
@@ -101,15 +101,23 @@ export default {
         receive_id: this.chatData.receive_id,
         sender_name: this.chatData.sender_name,
         receive_name: this.chatData.receive_name,
-        time: this.initDate(),
         content: this.chatData.textarea,
       };
-      this.websock.send(JSON.stringify(data));
-      this.chatData.textarea = "";
+      this.axios
+        .post("/api/v1/socket/createSocket", {
+          data,
+        })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.websock.send(JSON.stringify(res.data.data));
+            this.chatData.textarea = "";
+          }
+        });
     },
     websocketclose(e) {
       //关闭
       console.log("断开连接", e);
+      this.initWebSocket();
     },
     //初始化时间格式
     initDate() {
@@ -134,16 +142,29 @@ export default {
       this.chatData.receive_id = index;
       this.chatData.receive_name = name;
       this.axios
-        .post("/api/v1/socket/searchOr",{
-          data:{
-            sender_id:this.chatData.sender_id,
-            receive_id:this.chatData.receive_id,
-          }
+        .post("/api/v1/socket/searchOr", {
+          data: {
+            sender_id: this.chatData.sender_id,
+            receive_id: this.chatData.receive_id,
+          },
         })
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data.data);
+          res.data.data.forEach((el) => {
+            this.listData.push(el);
+          });
         });
     },
+    //让滚轮处于底部
+    scrollToBottom() {
+      this.$nextTick(() => {
+        var container = this.$el.querySelector(".chat-content");
+        container.scrollTop = container.scrollHeight;
+      });
+    },
+  },
+  updated() {
+    this.scrollToBottom();
   },
   destroyed() {
     this.websock.close(); //离开路由之后断开websocket连接
@@ -178,6 +199,7 @@ export default {
       border: 1px solid #ccc;
       background: #fff;
       overflow: hidden;
+      overflow-y: auto;
       ul {
         height: 100%;
         li {
