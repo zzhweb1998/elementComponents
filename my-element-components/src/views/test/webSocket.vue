@@ -1,7 +1,7 @@
 <template>
   <!-- 基于webSocket聊天窗 -->
   <div id="web-socket">
-    <div sel_box>
+    <div class="sel_box">
       <el-button @click="selUser(1,'1号')" :disabled="chatData.sender_id===1">1号</el-button>
       <el-button @click="selUser(2,'2号')" :disabled="chatData.sender_id===2">2号</el-button>
       <el-button @click="selUser(3,'3号')" :disabled="chatData.sender_id===3">3号</el-button>

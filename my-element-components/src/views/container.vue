@@ -12,13 +12,14 @@
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span>FORM组件</span>
+            <span>Form组件</span>
           </template>
           <el-menu-item-group>
             <el-menu-item index="/form/dynamicContainer">动态</el-menu-item>
             <el-menu-item index="/form/recursionContainer">递归</el-menu-item>
             <el-menu-item index="/form/enterForm">回车跳转</el-menu-item>
             <el-menu-item index="/form/verificationContainer">验证码</el-menu-item>
+            <el-menu-item index="/form/imageContainer">图片</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">

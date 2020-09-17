@@ -51,6 +51,11 @@ const routes = [{
     name: 'webSocket',
     component: () => import('../views/test/webSocket.vue')
   },
+  {
+    path: '/form/imageContainer',
+    name: 'imageContainer',
+    component: () => import('../views/form/imageContainer.vue')
+  },
 ]
 
 const router = new VueRouter({

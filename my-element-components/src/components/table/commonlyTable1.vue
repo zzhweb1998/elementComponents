@@ -1,7 +1,6 @@
 <template>
   <div id="commonlyTable1">
     <el-table
-      size="mini"
       :stripe="true"
       border
       ref="tables"
