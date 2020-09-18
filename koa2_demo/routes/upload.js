@@ -10,12 +10,14 @@ const goodsController = require('../controllers/goods')
 var storage = multer.diskStorage({
     //文件保存路径
     destination: function (req, file, cb) {
-        cb(null, 'public/uploads/')
+        cb(null, 'public/images/')
     },
     //修改文件名称
     filename: function (req, file, cb) {
+        console.log(req.files);
         var fileFormat = (file.originalname).split("."); //以点分割成数组，数组的最后一项就是后缀名
-        cb(null, Date.now() + "." + fileFormat[fileFormat.length - 1]);
+        // cb(null, Date.now() + "." + fileFormat[fileFormat.length - 1]);
+        cb(null, Date.now()+"."+fileFormat[fileFormat.length - 1]);
     }
 })
 
@@ -30,11 +32,6 @@ const router = new Router({
 })
 
 //路由
-// router.post('/upload', upload.array('avatar', 5), goodsController.uploadGoods)
-router.post('/upload', upload.single('file'), async (ctx) => {
-    ctx.body = {
-        filename: ctx.req.file.filename
-    };  //返回数据
- })
+router.post('/upload', upload.array('files'), goodsController.uploadGoods)
 
 module.exports = router

@@ -22,12 +22,13 @@
       </el-form-item>
       <el-form-item label="商品图片">
         <el-upload
-          action="loaclhost:3000/api/v1/upload"
+          action="/api/v1/upload"
           ref="upload"
           list-type="picture-card"
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
           :multiple="true"
+          :auto-upload="false"
           :limit="4"
           :file-list="form.imgList"
           :on-change="addImg"
@@ -58,9 +59,10 @@ export default {
       dialogImageUrl: "",
       dialogVisible: false,
       form: {
+        id: 0,
         name: "",
         content: "",
-        price: null,
+        price: 0,
         category: "",
         imgList: [],
       },
@@ -98,31 +100,38 @@ export default {
       });
     },
     onSubmit() {
-      this.$refs.upload.submit()
-      // const data = {
-      //   id: null,
-      //   data: {
-      //     name: this.form.name,
-      //     price: this.form.price,
-      //     content: this.form.content,
-      //     category: this.form.category,
-      //   },
-      // };
-      // const fd = new FormData();
+      // this.$refs.upload.submit()
+      let goodsInfo = {
+        id: this.form.id,
+        name: this.form.name,
+        price: this.form.price,
+        content: this.form.content,
+        category: this.form.category,
+        image: "",
+      };
+      const formData = new FormData();
 
-      // for (let i = 0; i < this.form.imgList.length; i++) {
-      //   console.log(11111111);
-      //   console.log(this.form.imgList[i]);
-      //   fd.append("avatar", this.form.imgList[i].raw);
-      //   console.log(fd.getAll('avatar'));
-      // }
-      // this.axios.post("/api/v1/upload",{ 
-      //   data: fd 
-      //   })
-      //   .then((res) => {
-      //     console.log(res.data);
-      //   });
+      for (let i = 0; i < this.form.imgList.length; i++) {
+        console.log(this.form.imgList[i].raw);
+        formData.append("files", this.form.imgList[i].raw);
+      }
+      this.axios
+        .post("/api/v1/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          params: goodsInfo,
+        })
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
 };
 </script>
+
+<style lang="less" scoped>
+#imageContainer {
+  width: 500px;
+}
+</style>

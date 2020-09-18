@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         // 商品图片
         image: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.JSON,
             allowNull: false,
             field: 'image'
         },

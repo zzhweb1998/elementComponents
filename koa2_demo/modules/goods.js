@@ -12,23 +12,30 @@ Goods.sync({
     force: false
 });
 
-class GoodsModel{
+class GoodsModel {
     //根据id查询
-    static async uploadGoods(files,data) {
-        data.data["image"] = JSON.stringify(files)
-        if(data.id){
+    static async uploadGoods(data) {
+        if (data.id !== 0) {
             //修改
             return await Article.update({
-                ...data.data
+                name: data.name,
+                price: data.price,
+                content: data.content,
+                category: data.category,
+                image: data.image,
             }, {
                 where: {
                     id: parseInt(data.id)
                 }
             })
-        }else{
+        } else {
             //创建
             return await Article.create({
-                ...data.data
+                name: data.name,
+                price: data.price,
+                content: data.content,
+                category: data.category,
+                image: data.image,
             })
         }
     }
