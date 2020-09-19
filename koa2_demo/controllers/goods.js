@@ -11,7 +11,7 @@ class GoodsController {
             }
         })
         req.image = JSON.stringify(images)
-
+        console.log(req);
         try {
             let data = await GoodsModel.uploadGoods(req);
             ctx.response.status = 200;

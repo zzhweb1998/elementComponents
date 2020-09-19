@@ -15,9 +15,10 @@ Goods.sync({
 class GoodsModel {
     //根据id查询
     static async uploadGoods(data) {
-        if (data.id !== 0) {
+        console.log(data);
+        if (data.id != 0) {
             //修改
-            return await Article.update({
+            return await Goods.update({
                 name: data.name,
                 price: data.price,
                 content: data.content,
@@ -30,7 +31,7 @@ class GoodsModel {
             })
         } else {
             //创建
-            return await Article.create({
+            return await Goods.create({
                 name: data.name,
                 price: data.price,
                 content: data.content,
