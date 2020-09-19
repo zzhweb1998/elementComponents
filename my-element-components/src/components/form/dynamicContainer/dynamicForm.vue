@@ -158,7 +158,7 @@ export default {
   },
   created() {
     self = this;
-    self.formData = JSON.parse(JSON.stringify(self.dynamicData));
+    self.formData = self.dynamicData
   },
   methods: {
     submitForm(formName) {
