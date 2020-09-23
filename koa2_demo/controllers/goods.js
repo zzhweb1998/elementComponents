@@ -1,6 +1,21 @@
 const GoodsModel = require('../modules/goods')
 
 class GoodsController {
+    static async uploadImage(ctx){
+        const files = ctx.req.files; //上传过来的文件
+        console.log(files);
+        let images = files.map(item => {
+            return {
+                url: item.filename
+            }
+        })
+        ctx.response.status = 200;
+        ctx.body = {
+            code: 200,
+            msg: '商品上传成功',
+            data: images
+        }
+    }
     //根据id查询
     static async uploadGoods(ctx) {
         const files = ctx.req.files; //上传过来的文件

@@ -10,7 +10,7 @@ const goodsController = require('../controllers/goods')
 var storage = multer.diskStorage({
     //文件保存路径
     destination: function (req, file, cb) {
-        cb(null, 'public/images/')
+        cb(null, '../koa2_demo/public/images/')
     },
     //修改文件名称
     filename: function (req, file, cb) {
@@ -32,6 +32,7 @@ const router = new Router({
 })
 
 //路由
-router.post('/upload', upload.array('files'), goodsController.uploadGoods)
+router.post('/upload', upload.array('files'), goodsController.uploadImage)
+router.post('/upload/image', upload.array('file'), goodsController.uploadImage)
 
 module.exports = router

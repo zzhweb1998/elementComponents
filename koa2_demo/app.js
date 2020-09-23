@@ -45,6 +45,9 @@ app.use(users.routes(), users.allowedMethods())
 app.use(socket.routes(), socket.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
 
+//读取pubilc下的文件（如图片）
+app.use(require('koa-static')(__dirname+'/public'))
+
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
