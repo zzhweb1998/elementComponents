@@ -45,6 +45,7 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
+    <image-upload :imageArr="imageArr" :showIndex="showIndex" />
   </div>
 </template>
 
@@ -56,6 +57,11 @@ export default {
   },
   data() {
     return {
+      //图片组件传值
+      imageArr: [
+      ],//存储图片数据
+      showIndex: 6,//图片显示数量
+      
       dialogImageUrl: "",
       dialogVisible: false,
       form: {
