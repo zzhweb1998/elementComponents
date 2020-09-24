@@ -9,6 +9,7 @@
     <el-button @click="fuzzyQuery">模糊查询</el-button>
     <el-button @click="orderData">排序</el-button>
     <el-button @click="assignQuery">指定查询</el-button>
+    <el-button @click="excelExport">导出excel</el-button>
   </div>
 </template>
 
@@ -111,8 +112,16 @@ export default {
         .then((res) => {
           console.log(res);
         });
-    }
+    },
 
+    excelExport(){
+      this.axios
+        .get("/api/v1/excel/export")
+        .then((res) => {
+          console.log(res.data.data.url);
+          window.open(res.data.data.url)
+        });
+    }
     
   },
 };
