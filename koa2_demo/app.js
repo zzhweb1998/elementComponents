@@ -11,7 +11,7 @@ const article = require('./routes/article')
 const users = require('./routes/users')
 const socket = require('./routes/socket')
 const upload = require('./routes/upload')
-
+const excel = require('./routes/excel')
 
 // error handler
 onerror(app)
@@ -44,6 +44,7 @@ app.use(article.routes(), article.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(socket.routes(), socket.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
+app.use(excel.routes(), excel.allowedMethods())
 
 //读取pubilc下的文件（如图片）
 app.use(require('koa-static')(__dirname+'/public'))
