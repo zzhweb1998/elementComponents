@@ -3,6 +3,7 @@ const db = require('../config/db');
 const Sequelize = db.sequelize;
 // 引入上一步的文章数据表模型文件
 const Goods = Sequelize.import('../schema/goods');
+const User = Sequelize.import('../schema/user');
 //引入sequelize
 const seq = require('sequelize');
 //引入sequelize的Op进行模糊查找
@@ -11,6 +12,12 @@ const Op = seq.Op;
 Goods.sync({
     force: false
 });
+
+// 外键关联
+Goods.belongsTo(User,{
+    // 创建外键 Goods.userId -> User.id 是一个多对一的关系。
+    foreignKey: 'userId'
+})
 
 class GoodsModel {
     //根据id查询

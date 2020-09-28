@@ -8,10 +8,10 @@ const logger = require('koa-logger')
 const cors = require('koa-cors');
 
 const article = require('./routes/article')
-const users = require('./routes/users')
 const socket = require('./routes/socket')
 const upload = require('./routes/upload')
 const excel = require('./routes/excel')
+const user = require('./routes/user')
 
 // error handler
 onerror(app)
@@ -41,10 +41,10 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(article.routes(), article.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
 app.use(socket.routes(), socket.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
 app.use(excel.routes(), excel.allowedMethods())
+app.use(user.routes(), user.allowedMethods())
 
 //读取pubilc下的文件（如图片）
 app.use(require('koa-static')(__dirname+'/public'))

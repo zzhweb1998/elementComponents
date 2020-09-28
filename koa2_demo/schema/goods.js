@@ -10,6 +10,11 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true,
             autoIncrement: true,
         },
+        //用户id
+        userId:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
         // 商品名称
         name: {
             type: DataTypes.STRING(50),
@@ -37,7 +42,6 @@ module.exports = function (sequelize, DataTypes) {
         // 商品图片
         image: {
             type: DataTypes.JSON,
-            allowNull: false,
             field: 'image'
         },
         // 创建时间
