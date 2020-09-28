@@ -1,4 +1,5 @@
 <template>
+<!-- 验证码 -->
   <div class="ValidCode" :style="`width:${width}; height:${height}`" @click="refreshCode">
     <span v-for="(item, index) in codeList" :key="index" :style="getStyle(item)">{{item.code}}</span>
   </div>

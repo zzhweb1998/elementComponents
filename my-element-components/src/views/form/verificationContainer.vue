@@ -3,6 +3,8 @@
   <div id="verificationCode">
     <p style="margin-bottom:30px">验证码</p>
     <verification-code @sendData="getCode"></verification-code>
+    <!-- 0.5px高 -->
+    <div style="margin-top:30px;height:1px;background:#333;transform:scaleY(0.5)"></div>
   </div>
 </template>
 
