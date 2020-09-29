@@ -192,23 +192,30 @@ export default {
     login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.loginInfo);
           this.axios
             .post("/api/v1/user/login", {
               data: this.loginInfo,
             })
             .then((res) => {
               if (res.data.code === 200) {
+                sessionStorage.setItem('account',this.loginInfo.account)
+                sessionStorage.setItem('password',this.loginInfo.password)
+                this.loginInfo = {
+                  account: "",
+                  password: "",
+                  verification: "",
+                }
+                this.$router.go(-1)
                 this.$message({
                   message: res.data.msg,
                   type: "success",
-                  showClose:"true"
+                  showClose: "true",
                 });
               } else {
                 this.$message({
                   message: res.data.msg,
                   type: "error",
-                  showClose:"true"
+                  showClose: "true",
                 });
               }
             });
@@ -221,31 +228,23 @@ export default {
     register(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.registerInfo);
           this.axios
             .post("/api/v1/user/register", {
               data: this.registerInfo,
             })
             .then((res) => {
               if (res.data.code === 200) {
-                sessionStorage.setItem('account',this.loginInfo.account)
-                sessionStorage.setItem('password',this.loginInfo.password)
-                this.loginInfo = {
-                  account: "",
-                  password: "",
-                  verification: "",
-                },
-                  this.$message({
-                    message: res.data.msg,
-                    type: "success",
-                    showClose:"true"
-                  });
+                this.$message({
+                  message: res.data.msg,
+                  type: "success",
+                  showClose: "true",
+                });
                 this.handleClose();
               } else {
                 this.$message({
                   message: res.data.msg,
                   type: "error",
-                  showClose:"true"
+                  showClose: "true",
                 });
               }
             });
