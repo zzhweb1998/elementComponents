@@ -1,7 +1,16 @@
 <template>
-<!-- 验证码 -->
-  <div class="ValidCode" :style="`width:${width}; height:${height}`" @click="refreshCode">
-    <span v-for="(item, index) in codeList" :key="index" :style="getStyle(item)">{{item.code}}</span>
+  <!-- 验证码 -->
+  <div
+    class="ValidCode"
+    :style="`width:${width}; height:${height}`"
+    @click="refreshCode"
+  >
+    <span
+      v-for="(item, index) in codeList"
+      :key="index"
+      :style="getStyle(item)"
+      >{{ item.code }}</span
+    >
   </div>
 </template>
 
@@ -51,7 +60,7 @@ export default {
         codeList.push({
           code: chars.charAt(Math.floor(Math.random() * charsLen)),
           color: `rgb(${rgb})`,
-          fontSize: `1${[Math.floor(Math.random() * 10)]}px`,
+          fontSize: 16 + Math.floor(Math.random() * 6) + "px",
           padding: `${[Math.floor(Math.random() * 10)]}px`,
           transform: `rotate(${
             Math.floor(Math.random() * 90) - Math.floor(Math.random() * 90)
@@ -79,6 +88,14 @@ export default {
   justify-content: center;
   align-items: center;
   border: 1px solid #ccc;
+  background: #fff;
+  float: right;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently not supported by any browser */
   cursor: pointer;
   span {
     display: inline-block;

@@ -22,6 +22,24 @@ class UserModel {
         })
     }
 
+    //注册账号
+    static async register(data) {
+        return await User.create({
+            account: data.account,
+            password: data.password,
+            email:data.email,
+        })
+    }
+
+    //根据账号查询用户
+    static async accountQuery(account){
+        return await User.findOne({
+            where: {
+                account: account,
+            },
+        })
+    }
+
 }
 
 module.exports = UserModel

@@ -56,12 +56,12 @@ export default {
                   }
                   setTimeout(() => {
                     if (!Number(value)) {
-                      callback(new Error("请输入大于1的整数"));
+                      callback(new Error("请输入大于0的整数"));
                     } else {
                       const re = /^[1-9][0-9]*$/;
                       const rsCheck = re.test(value);
                       if (!rsCheck) {
-                        callback(new Error("请输入大于1的整数"));
+                        callback(new Error("请输入大于0的整数"));
                       } else {
                         callback();
                       }

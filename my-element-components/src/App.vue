@@ -1,20 +1,23 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>
+      <!-- <el-header>
         <span>My-Element-Components</span>
-      </el-header>
-      <container></container>
+      </el-header> -->
+      <!-- <container></container> -->
+      <login />
     </el-container>
   </div>
 </template>
 
 <script>
 import container from './views/container.vue'
+import login from './views/login.vue'
 export default {
   name: "app",
   components: {
-    container
+    container,
+    login
   },
 }
 </script>

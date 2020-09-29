@@ -21,5 +21,58 @@ class UserController {
             }
         }
     }
+    //登陆
+    static async login(ctx) {
+        let req = ctx.request.body.data;
+        try {
+            let data = await UserModel.accountQuery(req.account);
+            if (data.password == req.password) {
+                ctx.response.status = 200;
+                ctx.body = {
+                    code: 200,
+                    msg: '登陆成功',
+                }
+            } else {
+                ctx.response.status = 200;
+                ctx.body = {
+                    code: 412,
+                    msg: '密码错误',
+                }
+            }
+        } catch (err) {
+            ctx.response.status = 412;
+            ctx.body = {
+                code: 412,
+                msg: '账号有误',
+            }
+        }
+    }
+    //创建账号
+    static async register(ctx) {
+        let req = ctx.request.body.data;
+        try {
+            let data = await UserModel.accountQuery(req.account);
+            ctx.response.status = 200;
+            ctx.body = {
+                code: 412,
+                msg: '改账号已被注册',
+            }
+        } catch (err) {
+            try {
+                let data = await UserModel.register(req);
+                ctx.response.status = 200;
+                ctx.body = {
+                    code: 200,
+                    msg: '注册成功',
+                }
+            } catch (err) {
+                ctx.response.status = 412;
+                ctx.body = {
+                    code: 412,
+                    msg: '注册失败',
+                }
+            }
+        }
+    }
 }
 module.exports = UserController

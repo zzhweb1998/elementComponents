@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-//文章（数据模型）
+//用户（数据模型）
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('user', {
         // 用户ID
@@ -10,11 +10,23 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true,
             autoIncrement: true,
         },
-        // 用户名称
-        name: {
+        // 账号
+        account: {
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            field: 'account',
+        },
+        // 密码
+        password: {
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            field: 'password',
+        },
+        // 邮箱
+        email: {
             type: DataTypes.STRING(50),
             allowNull: false,
-            field: 'name',
+            field: 'email',
         },
     }, {
         //启用该配置后会自动添加createdAt、updatedAt两个字段，分别表示创建和更新时间
