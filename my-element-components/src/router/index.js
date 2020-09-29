@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
     path: '/',
     name: 'HelloComponents',
     component: () => import('../views/HelloComponents.vue')
@@ -25,6 +26,11 @@ const routes = [{
     path: '/form/verificationContainer',
     name: 'verificationContainer',
     component: () => import('../views/form/verificationContainer.vue')
+  },
+  {
+    path: '/form/imageContainer',
+    name: 'imageContainer',
+    component: () => import('../views/form/imageContainer.vue')
   },
   {
     path: '/table/customContainer',
@@ -52,9 +58,9 @@ const routes = [{
     component: () => import('../views/test/webSocket.vue')
   },
   {
-    path: '/form/imageContainer',
-    name: 'imageContainer',
-    component: () => import('../views/form/imageContainer.vue')
+    path: '/test/login',
+    name: 'login',
+    component: () => import('../views/login.vue')
   },
 ]
 

@@ -24,6 +24,7 @@ class UserModel {
 
     //注册账号
     static async register(data) {
+        console.log(data);
         return await User.create({
             account: data.account,
             password: data.password,

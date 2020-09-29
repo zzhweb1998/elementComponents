@@ -20,20 +20,22 @@
               type="password"
               v-model="loginInfo.password"
               autocomplete="off"
+              show-password
             ></el-input>
           </el-form-item>
           <el-form-item label="验证码" prop="verification">
             <el-input
-              v-model.number="loginInfo.verification"
+              v-model="loginInfo.verification"
+              autocomplete="off"
               style="width: 60%"
             ></el-input>
             <verification-code @sendData="getCode"></verification-code>
           </el-form-item>
           <el-form-item label-width="200px">
+            <el-button @click="dialogVisible = true">注册</el-button>
             <el-button type="primary" @click="login('loginInfo')"
               >登陆</el-button
             >
-            <el-button @click="dialogVisible = true">注册</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -64,10 +66,11 @@
             type="password"
             v-model="registerInfo.password"
             autocomplete="off"
+            show-password
           ></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="mail">
-          <el-input v-model="registerInfo.mail"></el-input>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="registerInfo.email"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -124,7 +127,7 @@ export default {
           { required: true, message: "请输入验证码", trigger: "blur" },
           {
             validator: (rule, value, callback) => {
-              if (value.toUpperCase() != this.vCode.toUpperCase()) {
+              if (value.toString().toUpperCase() != this.vCode.toUpperCase()) {
                 callback(new Error("验证码错误"));
               } else {
                 callback();
@@ -153,7 +156,7 @@ export default {
             trigger: "blur",
           },
         ],
-        mail: [
+        email: [
           { required: true, message: "请输入邮箱", trigger: "blur" },
           {
             validator: (rule, value, callback) => {
@@ -182,7 +185,7 @@ export default {
       this.registerInfo = {
         account: "",
         password: "",
-        mail: "",
+        email: "",
       };
     },
     //登陆
@@ -190,11 +193,25 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log(this.loginInfo);
-          this.axios.post('/api/v1/user/login',{
-            data:this.loginInfo
-          }).then(res=>{
-            console.log(res);
-          })
+          this.axios
+            .post("/api/v1/user/login", {
+              data: this.loginInfo,
+            })
+            .then((res) => {
+              if (res.data.code === 200) {
+                this.$message({
+                  message: res.data.msg,
+                  type: "success",
+                  showClose:"true"
+                });
+              } else {
+                this.$message({
+                  message: res.data.msg,
+                  type: "error",
+                  showClose:"true"
+                });
+              }
+            });
         } else {
           return false;
         }
@@ -205,11 +222,33 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log(this.registerInfo);
-          this.axios.post('/api/v1/user/register',{
-            data:this.registerInfo
-          }).then(res=>{
-            console.log(res);
-          })
+          this.axios
+            .post("/api/v1/user/register", {
+              data: this.registerInfo,
+            })
+            .then((res) => {
+              if (res.data.code === 200) {
+                sessionStorage.setItem('account',this.loginInfo.account)
+                sessionStorage.setItem('password',this.loginInfo.password)
+                this.loginInfo = {
+                  account: "",
+                  password: "",
+                  verification: "",
+                },
+                  this.$message({
+                    message: res.data.msg,
+                    type: "success",
+                    showClose:"true"
+                  });
+                this.handleClose();
+              } else {
+                this.$message({
+                  message: res.data.msg,
+                  type: "error",
+                  showClose:"true"
+                });
+              }
+            });
         } else {
           return false;
         }
@@ -223,8 +262,9 @@ export default {
 #loginComponent {
   width: 100%;
   height: 100%;
-  background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601383367859&di=7a4442d529ec11a9f1e79f8f3e67d797&imgtype=0&src=http%3A%2F%2Fpic.vjshi.com%2F2018-09-17%2F20a9b2b7cf42a5c13453ba3692ca1c0c%2F00001.jpg%3Fx-oss-process%3Dstyle%2Fwatermark') no-repeat;
-  background-size:cover;
+  background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601383367859&di=7a4442d529ec11a9f1e79f8f3e67d797&imgtype=0&src=http%3A%2F%2Fpic.vjshi.com%2F2018-09-17%2F20a9b2b7cf42a5c13453ba3692ca1c0c%2F00001.jpg%3Fx-oss-process%3Dstyle%2Fwatermark")
+    no-repeat;
+  background-size: cover;
 }
 .lc-box {
   position: relative;
@@ -237,7 +277,7 @@ export default {
   border: 1px solid #999;
   border-radius: 20px;
   box-shadow: 0 0 10px #999;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   .lc-content {
     padding: 0 20px;
     p {
@@ -245,8 +285,8 @@ export default {
       padding: 20px;
     }
   }
-  .el-form{
-    /deep/ .el-form-item__label{
+  .el-form {
+    /deep/ .el-form-item__label {
       color: #fff;
     }
   }

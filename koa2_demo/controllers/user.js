@@ -40,7 +40,7 @@ class UserController {
                 }
             }
         } catch (err) {
-            ctx.response.status = 412;
+            ctx.response.status = 200;
             ctx.body = {
                 code: 412,
                 msg: '账号有误',
@@ -52,25 +52,28 @@ class UserController {
         let req = ctx.request.body.data;
         try {
             let data = await UserModel.accountQuery(req.account);
-            ctx.response.status = 200;
-            ctx.body = {
-                code: 412,
-                msg: '改账号已被注册',
-            }
-        } catch (err) {
-            try {
+            if (!data) {
+                console.log(111);
                 let data = await UserModel.register(req);
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
                     msg: '注册成功',
                 }
-            } catch (err) {
-                ctx.response.status = 412;
+            } else {
+                ctx.response.status = 200;
                 ctx.body = {
                     code: 412,
-                    msg: '注册失败',
+                    msg: '改账号已被注册',
+                    data
                 }
+            }
+
+        } catch (err) {
+            ctx.response.status = 200;
+            ctx.body = {
+                code: 412,
+                msg: '注册失败',
             }
         }
     }
