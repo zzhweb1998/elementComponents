@@ -2,7 +2,7 @@
   <!-- 发布商品 -->
   <div id="releaseGoods">
     <el-button type="primary" @click="dialogVisible = true">发布商品</el-button>
-
+    <!-- 编辑框dialog -->
     <el-dialog
       title="商品信息编辑"
       :visible.sync="dialogVisible"
@@ -37,6 +37,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="商品图片" prop="imgList">
+          <!-- 图片上传组件 -->
           <image-upload :imageArr="form.imgList" :showIndex="showIndex" />
         </el-form-item>
       </el-form>
@@ -66,7 +67,7 @@ export default {
         price: 0,
         category: "",
         imgList: [],
-      },
+      }, //表单参数
       options: [
         {
           label: "家电",
