@@ -25,9 +25,9 @@
     >
       <i class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt />
-    </el-dialog>
+    <div class="imageDialog" v-if="dialogVisible" @click="dialogVisible = false" >
+      <img :src="dialogImageUrl" alt/>
+    </div>
   </div>
 </template>
 
@@ -130,6 +130,23 @@ export default {
       .el-icon-delete{
         left: 50%;
       }
+    }
+  }
+  .imageDialog{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 9998;
+    img{
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: auto;
     }
   }
 }

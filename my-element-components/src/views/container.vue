@@ -20,6 +20,7 @@
             <el-menu-item index="/form/enterForm">回车跳转</el-menu-item>
             <el-menu-item index="/form/verificationContainer">验证码</el-menu-item>
             <el-menu-item index="/form/imageContainer">图片</el-menu-item>
+            <el-menu-item index="/form/goodsContainer">商品</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">

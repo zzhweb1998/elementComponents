@@ -6,11 +6,6 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'HelloComponents',
-    component: () => import('../views/HelloComponents.vue')
-  },
-  {
     path: '/form/dynamicContainer',
     name: 'dynamicContainer',
     component: () => import('../views/form/dynamicContainer.vue')
@@ -31,6 +26,11 @@ const routes = [
     path: '/form/imageContainer',
     name: 'imageContainer',
     component: () => import('../views/form/imageContainer.vue')
+  },
+  {
+    path: '/form/goodsContainer',
+    name: 'goodsContainer',
+    component: () => import('../views/form/goodsContainer.vue')
   },
   {
     path: '/table/customContainer',

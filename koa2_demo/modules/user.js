@@ -13,6 +13,12 @@ User.sync({
 });
 
 class UserModel {
+    //分页
+    static async getPage(){
+        let sql = `SELECT COUNT(*) FROM user ORDER BY id DESC; SELECT * FROM user ORDER BY id DESC limit 1,10;`
+        return await query(sql)
+    }
+
     //根据id查询
     static async getUserDetail(id) {
         return await User.findOne({
