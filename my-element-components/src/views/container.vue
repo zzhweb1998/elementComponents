@@ -53,6 +53,15 @@
             <el-menu-item index="/test/login">登录</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-submenu index="5">
+          <template slot="title">
+            <i class="el-icon-menu"></i>
+            <span>其它组件</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/timer/timer">时钟</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </el-aside>
     <el-main>

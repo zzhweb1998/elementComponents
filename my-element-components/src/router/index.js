@@ -62,6 +62,11 @@ const routes = [
     name: 'login',
     component: () => import('../views/login.vue')
   },
+  {
+    path: '/timer/timer',
+    name: 'timer',
+    component: () => import('../views/timer/timer.vue')
+  },
 ]
 
 const router = new VueRouter({
