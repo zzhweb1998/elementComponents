@@ -8,7 +8,7 @@
       <div class="menuBox" v-show="!isCollapse">
         <el-menu v-for="(itm,index) in demo" :key="index" :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
           router active-text-color="#409EFF">
-          <el-submenu :index="index">
+          <el-submenu :index="index.toString()">
             <template slot="title">
               <i class="el-icon-menu"></i>
               <span>{{itm.title}}</span>
@@ -22,7 +22,7 @@
       <div class="menuBox" v-show="isCollapse">
         <el-menu v-for="(itm,index) in components" :key="index" :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen"
           @close="handleClose" router active-text-color="#409EFF">
-          <el-submenu :index="index">
+          <el-submenu :index="index.toString()">
             <template slot="title">
               <i class="el-icon-menu"></i>
               <span>{{itm.title}}</span>
@@ -126,12 +126,20 @@ export default {
           children: [
             {
               name: '测试',
-              url: ''
+              url: '/base/ceshi2'
             },
           ]
         },
       ]
     };
+  },
+  created () {
+    this.isCollapse = sessionStorage.getItem('isCollapse') || false
+  },
+  watch: {
+    isCollapse (newValue, oldValue) {
+      sessionStorage.setItem('isCollapse', newValue)
+    }
   },
   methods: {
     handleOpen () { },

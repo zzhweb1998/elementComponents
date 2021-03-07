@@ -1,73 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import routeArr from './common'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/form/dynamicContainer',
-    name: 'dynamicContainer',
-    component: () => import('../views/form/dynamicContainer.vue')
-  }, {
-    path: '/form/enterForm',
-    name: 'enterForm',
-    component: () => import('../views/form/enterForm.vue')
-  }, {
-    path: '/form/recursionContainer',
-    name: 'recursionContainer',
-    component: () => import('../views/form/recursionContainer.vue')
-  }, {
-    path: '/form/verificationContainer',
-    name: 'verificationContainer',
-    component: () => import('../views/form/verificationContainer.vue')
-  },
-  {
-    path: '/form/imageContainer',
-    name: 'imageContainer',
-    component: () => import('../views/form/imageContainer.vue')
-  },
-  {
-    path: '/form/goodsContainer',
-    name: 'goodsContainer',
-    component: () => import('../views/form/goodsContainer.vue')
-  },
-  {
-    path: '/table/customContainer',
-    name: 'customContainer',
-    component: () => import('../views/table/customContainer.vue')
-  },
-  {
-    path: '/table/commonlyContainer',
-    name: 'commonlyContainer',
-    component: () => import('../views/table/commonlyContainer.vue')
-  },
-  {
-    path: '/layout/waterfallContainer',
-    name: 'waterfallContainer',
-    component: () => import('../views/layout/waterfallContainer.vue')
-  },
-  {
-    path: '/test/test1',
-    name: 'test1',
-    component: () => import('../views/test/test1.vue')
-  }, 
-  {
-    path: '/test/webSocket',
-    name: 'webSocket',
-    component: () => import('../views/test/webSocket.vue')
-  },
-  {
-    path: '/test/login',
-    name: 'login',
-    component: () => import('../views/login.vue')
-  },
-  {
-    path: '/timer/timer',
-    name: 'timer',
-    component: () => import('../views/timer/timer.vue')
-  },
-]
+function routeFunc(arr){
+  const route = []
+  arr.forEach(item=>{
+    route.push({
+      path: item.path,
+      name: item.name,
+      component: () => import(`../views${item.path}.vue`),
+      children:item.children?routeFunc(item.children):[]
+    })
+  })
+  return arr.length>0?route:[]
+}
+const routes = routeFunc(routeArr)
 
 const router = new VueRouter({
   mode: 'history',

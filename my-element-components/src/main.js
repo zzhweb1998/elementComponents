@@ -11,6 +11,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import './common/directives/enterToNext'
 
+import './common/components/index'
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
